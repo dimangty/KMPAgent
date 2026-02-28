@@ -5,6 +5,7 @@ https://benchmarkee.ru/mobile/finance/ozon-bank
 Reference template (READ ONLY):
 /Users/dmitrijbykov/Documents/AndroidStudio/UnitUITest/TestingKMP
 
+
 Constraints:
 - Implement ALL screens and navigation
 - Use mock network layer (repository interfaces + fake implementation with delay)
