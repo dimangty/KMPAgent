@@ -1,0 +1,10 @@
+{
+  "sandbox": {
+    "enabled": true,
+    "filesystem": {
+      "allowRead": [
+        "//Users/dmitrijbykov/Documents/AndroidStudio/UnitUITest/TestingKMP"
+      ]
+    }
+  }
+}
