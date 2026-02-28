@@ -5,7 +5,6 @@ https://benchmarkee.ru/mobile/finance/ozon-bank
 Reference template (READ ONLY):
 /Users/dmitrijbykov/Documents/AndroidStudio/UnitUITest/TestingKMP
 
-
 Constraints:
 - Implement ALL screens and navigation
 - Use mock network layer (repository interfaces + fake implementation with delay)
@@ -14,7 +13,6 @@ Constraints:
 - Each UI component in its own file
 - Do NOT copy existing template screens
 - Follow template architecture (navigation, state, theming)
-- Android build MUST pass before returning result
 
 Steps:
 
@@ -29,36 +27,44 @@ Steps:
      - Exact file plan
 
 2) Then use the codex-kmp-implementer subagent to:
-   - Implement the generated specification
-   - Create all required files
-   - Setup mock network layer
-   - Setup navigation
 
-   AFTER implementation:
+   IMPLEMENTATION PHASE
+   - Implement the generated specification
+   - Create all required screens
+   - Create all UI components
+   - Setup navigation
+   - Setup mock network layer
+
+   AND THEN VALIDATION PHASE
+
    Run Android build:
    ./gradlew :androidApp:assembleDebug
 
-   IF BUILD FAILS:
+   IF ANDROID BUILD FAILS:
    - Inspect build errors
    - Fix code or Gradle configuration
-   - Re-run:
-     ./gradlew :androidApp:assembleDebug
+   - Re-run Android build
+   Repeat until Android build succeeds.
 
-   Repeat until build succeeds.
+   Run iOS framework build:
+   ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64
 
-   ONLY AFTER successful Android build:
-   Return unified diff patch.
+   IF iOS BUILD FAILS:
+   - Inspect build errors
+   - Fix Kotlin Multiplatform configuration or shared module code
+   - Re-run iOS build
+   Repeat until iOS build succeeds.
+
+   WHEN BOTH BUILDS SUCCEED:
+   Return unified diff patch only.
 
 3) Review the patch.
 
 4) Apply patch.
 
-5) After applying patch:
-   Run:
-   ./gradlew :androidApp:assembleDebug
-   ./gradlew :shared:compileKotlinMetadata
+5) After applying patch run final verification:
 
-6) Attempt iOS framework build:
+   ./gradlew :androidApp:assembleDebug
    ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64
 
-Report build status.
+Report final Android + iOS build status.
