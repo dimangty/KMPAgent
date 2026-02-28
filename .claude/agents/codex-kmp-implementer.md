@@ -41,7 +41,7 @@ Create a branch:
 2) Then invoke Codex with the implementation spec (provided by main Claude).
 Use a heredoc:
 
-codex --model gpt-5-codex <<'PROMPT'
+codex --model gpt-5.3-codex <<'PROMPT'
 You are implementing code inside the CURRENT REPOSITORY (writable).
 
 REFERENCE TEMPLATE (READ ONLY, DO NOT MODIFY):
