@@ -1,0 +1,63 @@
+We will implement a Kotlin Multiplatform (Android + iOS) app
+from this design:
+https://benchmarkee.ru/mobile/finance/ozon-bank
+
+Reference template (READ ONLY):
+/Users/dmitrijbykov/Documents/AndroidStudio/UnitUITest/TestingKMP
+
+Constraints:
+- Implement ALL screens and navigation
+- Use mock network layer (repository interfaces + fake implementation with delay)
+- UI state uses classes describing screen UI components
+- Each screen in its own file
+- Each UI component in its own file
+- Do NOT copy existing template screens
+- Follow template architecture (navigation, state, theming)
+- Android build MUST pass before returning result
+
+Steps:
+
+1) Use the kmp-figma-builder subagent to:
+   - Inspect the reference template (read-only)
+   - Generate implementation specification:
+     - Screen inventory
+     - Navigation graph
+     - UI state classes
+     - Components per screen
+     - Mock network contract
+     - Exact file plan
+
+2) Then use the codex-kmp-implementer subagent to:
+   - Implement the generated specification
+   - Create all required files
+   - Setup mock network layer
+   - Setup navigation
+
+   AFTER implementation:
+   Run Android build:
+   ./gradlew :androidApp:assembleDebug
+
+   IF BUILD FAILS:
+   - Inspect build errors
+   - Fix code or Gradle configuration
+   - Re-run:
+     ./gradlew :androidApp:assembleDebug
+
+   Repeat until build succeeds.
+
+   ONLY AFTER successful Android build:
+   Return unified diff patch.
+
+3) Review the patch.
+
+4) Apply patch.
+
+5) After applying patch:
+   Run:
+   ./gradlew :androidApp:assembleDebug
+   ./gradlew :shared:compileKotlinMetadata
+
+6) Attempt iOS framework build:
+   ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64
+
+Report build status.
